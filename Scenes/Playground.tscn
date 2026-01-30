@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bmyvq418ac8sg"]
+
+[ext_resource type="PackedScene" uid="uid://d0depdhk5cc6v" path="res://Assets/Entities/Player/Player.tscn" id="1_iualk"]
+
+[sub_resource type="Gradient" id="Gradient_exwnq"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_eqbnc"]
+gradient = SubResource("Gradient_exwnq")
+width = 1280
+height = 1280
+
+[node name="Playground" type="Node2D" unique_id=1353364668]
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=919224487]
+texture = SubResource("GradientTexture2D_eqbnc")
+
+[node name="Player" parent="." unique_id=170477119 instance=ExtResource("1_iualk")]

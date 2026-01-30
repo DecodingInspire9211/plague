@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://d0depdhk5cc6v"]
+
+[ext_resource type="Script" uid="uid://6urr48p7k66j" path="res://Assets/Entities/Player/player.gd" id="1_w2emo"]
+[ext_resource type="SpriteFrames" uid="uid://dg4dv5evtthaq" path="res://Assets/Entities/Player/player.tres" id="2_46rqe"]
+
+[sub_resource type="GDScript" id="GDScript_n3sr1"]
+script/source = "extends AnimatedSprite2D
+
+func _ready():
+	# Load the SpriteFrames resource
+	sprite_frames = load(\"res://Assets/Entities/Player/player.tres\")
+	
+	# Play an animation
+	play(\"idle\")
+
+func _process(delta):
+	if Input.is_action_pressed(\"player_down\"):
+		play(\"mv_down\")
+	else:
+		play(\"idle\")
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ow5bo"]
+size = Vector2(32, 32)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_46rqe"]
+radius = 32.0
+
+[node name="Player" type="CharacterBody2D" unique_id=170477119]
+script = ExtResource("1_w2emo")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=551129359]
+sprite_frames = ExtResource("2_46rqe")
+animation = &"idle"
+script = SubResource("GDScript_n3sr1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=53437776]
+shape = SubResource("RectangleShape2D_ow5bo")
+
+[node name="PlayerCamera" type="Camera2D" parent="." unique_id=158233391]
+position_smoothing_speed = 10.0
+
+[node name="Trigger" type="Area2D" parent="." unique_id=1159156871]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trigger" unique_id=2129032236]
+shape = SubResource("CircleShape2D_46rqe")
+debug_color = Color(0.54855627, 0.5647507, 3.85046e-07, 0.41960785)
