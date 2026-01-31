@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://3nfqnyi1fciq"]
+
+[ext_resource type="PackedScene" uid="uid://bb1k08dhupl44" path="res://Assets/Entities/NPC/NPC.tscn" id="1_bcyhd"]
+[ext_resource type="Script" uid="uid://pd6eqgu8bi2i" path="res://Assets/Entities/NPC/Bob/bob.gd" id="2_vk5n0"]
+[ext_resource type="Texture2D" uid="uid://ikify50pn1p1" path="res://Assets/Entities/NPC/Bob/sprite/bob.png" id="3_552vl"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mdr3g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_552vl")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}]
+
+[node name="Bob" unique_id=522452719 instance=ExtResource("1_bcyhd")]
+script = ExtResource("2_vk5n0")
+wander_radius = 100.0
+wander_speed = 30.0
+display_name = "Bob the Ross"
+interaction_prompt = "Talk (E)"
+
+[node name="AnimatedSprite2D" parent="." index="0" unique_id=1421797300]
+sprite_frames = SubResource("SpriteFrames_mdr3g")
+animation = &"idle"
+
+[node name="Label" parent="InteractionPrompt/PanelContainer" parent_id_path=PackedInt32Array(288041333) index="0" unique_id=29840377]
+label_settings = null
+horizontal_alignment = 1

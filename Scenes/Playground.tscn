@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://bmyvq418ac8sg"]
 
 [ext_resource type="PackedScene" uid="uid://d0depdhk5cc6v" path="res://Assets/Entities/Player/Player.tscn" id="1_iualk"]
+[ext_resource type="PackedScene" uid="uid://3nfqnyi1fciq" path="res://Assets/Entities/NPC/Bob/bob.tscn" id="2_exwnq"]
+[ext_resource type="PackedScene" uid="uid://bf0il6nk7d8fm" path="res://Assets/Entities/NPC/Evelyn/evelyn.tscn" id="3_eqbnc"]
 
 [sub_resource type="Gradient" id="Gradient_exwnq"]
 
@@ -15,3 +17,9 @@ height = 1280
 texture = SubResource("GradientTexture2D_eqbnc")
 
 [node name="Player" parent="." unique_id=170477119 instance=ExtResource("1_iualk")]
+
+[node name="PEASANT" parent="." unique_id=522452719 instance=ExtResource("2_exwnq")]
+position = Vector2(116, -48)
+
+[node name="Rumpelstiltskinella" parent="." unique_id=6822408 instance=ExtResource("3_eqbnc")]
+position = Vector2(50, -94)

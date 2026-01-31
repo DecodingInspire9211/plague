@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bf0il6nk7d8fm"]
+
+[ext_resource type="PackedScene" uid="uid://bb1k08dhupl44" path="res://Assets/Entities/NPC/NPC.tscn" id="1_upbhe"]
+[ext_resource type="Script" uid="uid://cf01io25w28s8" path="res://Assets/Entities/NPC/Evelyn/evelyn.gd" id="2_r7ojk"]
+[ext_resource type="Texture2D" uid="uid://blylq2a1uteem" path="res://Assets/Entities/NPC/Evelyn/sprite/Evelyn.png" id="3_822t2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l8hdc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_822t2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Evelyn" unique_id=522452719 instance=ExtResource("1_upbhe")]
+script = ExtResource("2_r7ojk")
+items_for_sale = Array[String](["Potion", "Sword", "", "", "", ""])
+item_prices = Array[int]([10, 50])
+display_name = "Vivianne"
+interaction_prompt = "Shop (E)"
+
+[node name="AnimatedSprite2D" parent="." index="0" unique_id=1421797300]
+sprite_frames = SubResource("SpriteFrames_l8hdc")

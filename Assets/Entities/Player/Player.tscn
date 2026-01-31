@@ -37,9 +37,6 @@ func match_direction_to_animation(direction: Vector2) -> String:
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ow5bo"]
 size = Vector2(32, 32)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_46rqe"]
-radius = 32.0
-
 [node name="Player" type="CharacterBody2D" unique_id=170477119]
 script = ExtResource("1_w2emo")
 
@@ -54,8 +51,4 @@ shape = SubResource("RectangleShape2D_ow5bo")
 [node name="PlayerCamera" type="Camera2D" parent="." unique_id=158233391]
 position_smoothing_speed = 10.0
 
-[node name="Trigger" type="Area2D" parent="." unique_id=1159156871]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Trigger" unique_id=2129032236]
-shape = SubResource("CircleShape2D_46rqe")
-debug_color = Color(0.54855627, 0.5647507, 3.85046e-07, 0.41960785)
+[node name="InteractionRaycast" type="RayCast2D" parent="." unique_id=1856822038]
