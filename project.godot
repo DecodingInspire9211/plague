@@ -23,6 +23,10 @@ window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 window/vsync/vsync_mode=2
 
+[dotnet]
+
+project/assembly_name="plague"
+
 [file_customization]
 
 folder_colors={
