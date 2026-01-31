@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://cocxgqafe663e"]
+
+[ext_resource type="Script" uid="uid://dh2valgk2b6oa" path="res://Scripts/inventory/inventory_slot_ui.gd" id="1_nu4f7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_g6iog"]
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="InventorySlotUi" type="PanelContainer" unique_id=45287900]
+custom_minimum_size = Vector2(32, 32)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -448.0
+offset_bottom = -238.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nu4f7")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=190607476]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="PanelContainer" parent="MarginContainer" unique_id=237582017]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ItemIcon" type="TextureRect" parent="MarginContainer/VBoxContainer" unique_id=431695413]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="QuantityLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=459640174]
+layout_mode = 2
+text = "\"\""
+label_settings = SubResource("LabelSettings_g6iog")
+horizontal_alignment = 2

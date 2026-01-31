@@ -8,14 +8,30 @@ var SPEED := WALK
 @export var interaction_range := 50.0
 
 @onready var interaction_raycast: RayCast2D = $InteractionRaycast
+@onready var inventory: Inventory = $Inventory
+@onready var inventory_ui = $UILayer/InventoryUI
 
 var last_direction := Vector2.DOWN
 var current_interactable: Interactable = null
 
-
 func _ready():
 	SPEED = WALK
 	setup_raycast()
+	
+	# Connect UI to inventory
+	inventory_ui.set_inventory(inventory)
+	
+	test_inventory()
+
+func test_inventory():
+	# Load the items we created
+	var health_potion = load("res://Data/test.tres")
+	
+	# Add items to inventory
+	inventory.add_item(health_potion, 5)
+	
+	print("Inventory test:")
+	print("- Health Potions: %d" % inventory.get_item_count(health_potion))
 
 
 func _physics_process(delta):
