@@ -7,17 +7,31 @@
 script/source = "extends AnimatedSprite2D
 
 func _ready():
-	# Load the SpriteFrames resource
 	sprite_frames = load(\"res://Assets/Entities/Player/player.tres\")
-	
-	# Play an animation
-	play(\"idle\")
+	play(\"mv_down\")
+	frame = 0
+	pause()
 
 func _process(delta):
-	if Input.is_action_pressed(\"player_down\"):
-		play(\"mv_down\")
+	var direction = Input.get_vector(\"player_left\", \"player_right\", \"player_up\", \"player_down\")
+	var is_sprinting = Input.is_action_pressed(\"player_run\")
+	
+	if direction != Vector2.ZERO:
+		var animation_name = match_direction_to_animation(direction)
+		if animation_name != animation:
+			play(animation_name)
+		else:
+			play()
+		speed_scale = 2.0 if is_sprinting else 1.0
 	else:
-		play(\"idle\")
+		frame = 0
+		pause()
+
+func match_direction_to_animation(direction: Vector2) -> String:
+	if abs(direction.y) > abs(direction.x):
+		return \"mv_down\" if direction.y > 0 else \"mv_up\"
+	else:
+		return \"mv_right\" if direction.x > 0 else \"mv_left\"
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ow5bo"]
@@ -31,7 +45,7 @@ script = ExtResource("1_w2emo")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=551129359]
 sprite_frames = ExtResource("2_46rqe")
-animation = &"idle"
+animation = &"mv_up"
 script = SubResource("GDScript_n3sr1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=53437776]
