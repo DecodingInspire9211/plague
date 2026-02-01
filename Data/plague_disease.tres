@@ -8,5 +8,5 @@ disease_name = "Plague"
 description = "A deadly disease causing fever, chills, and fatigue. Fatal if left untreated."
 damage_per_second = 0.5
 progression_time = 120.0
-visual_tint = Color(0.22071052, 0.36914292, 0.22459164, 1)
+visual_tint = Color(0.5, 0.9, 0.5, 1)
 symptoms = Array[String](["Fever", "Coughing", "Weakness", "Chills"])

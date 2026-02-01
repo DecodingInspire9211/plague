@@ -126,9 +126,6 @@ func update_walk_sound() -> void:
 	# Adjust pitch based on speed
 	if walk_sound and is_walking:
 		walk_sound.pitch_scale = 1.5 if SPEED == RUN else 1.0
-		#current_interactable.interact(self)
 
-
-# --- Added helper for NPCs to access the player inventory safely ---
 func get_inventory() -> Inventory:
 	return inventory
