@@ -9,8 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://bjhwdq3821pom" path="res://Assets/Entities/NPC/Peasant/peasant.tscn" id="4_wwyh0"]
 [ext_resource type="Texture2D" uid="uid://boyttqe363al5" path="res://Assets/Entities/NPC/Peasant/sprite/MA2.png" id="5_ijo1q"]
 [ext_resource type="Texture2D" uid="uid://cq6m8or12s5e4" path="res://Assets/Entities/NPC/Peasant/sprite/MA1.png" id="7_4kef1"]
+[ext_resource type="Resource" uid="uid://drhnrf5siyhho" path="res://Data/plague_cure.tres" id="7_n3h7w"]
 [ext_resource type="Texture2D" uid="uid://cjphgbdxs4sdx" path="res://Assets/Entities/NPC/Bob/anims/sprite_0.png" id="8_ohuer"]
+[ext_resource type="Resource" path="res://Data/medicine.tres" id="9_2v68k"]
 [ext_resource type="Texture2D" uid="uid://c40phd0kg6fbf" path="res://Assets/Entities/NPC/Peasant/sprite/FE3.png" id="9_n3h7w"]
+[ext_resource type="Resource" uid="uid://cn25wjsgf1l7u" path="res://Data/plague_disease.tres" id="10_b6vgq"]
 [ext_resource type="Script" uid="uid://d02p4n56oxifp" path="res://Scripts/area_2d.gd" id="12_ohuer"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_www31"]
@@ -984,6 +987,7 @@ tile_set = ExtResource("4_1uoo0")
 [node name="Peasant" parent="." unique_id=892663703 instance=ExtResource("4_wwyh0")]
 position = Vector2(274, 77)
 peasant_pngs = Array[Texture2D]([ExtResource("5_ijo1q")])
+required_medicine = ExtResource("7_n3h7w")
 dialogue_lines = Array[String](["leave me alone, i want to enjoy this cookie"])
 display_name = "kuky"
 
@@ -991,13 +995,18 @@ display_name = "kuky"
 position = Vector2(2, 145)
 rotation = -1.5707964
 peasant_pngs = Array[Texture2D]([ExtResource("7_4kef1")])
+required_medicine = ExtResource("9_2v68k")
 dialogue_lines = Array[String](["Leave him alone, he is just drunk"])
 display_name = "Bartender"
 interaction_prompt = "Interact(e)"
 
 [node name="Peasant3" parent="." unique_id=799788012 instance=ExtResource("4_wwyh0")]
 position = Vector2(39, 221)
+required_medicine = ExtResource("7_n3h7w")
+start_sick_on_ready = true
+starting_disease = ExtResource("10_b6vgq")
 dialogue_lines = Array[String](["YUM"])
+max_health = 10
 
 [node name="Peasant4" parent="." unique_id=108958085 instance=ExtResource("4_wwyh0")]
 position = Vector2(336, 246)

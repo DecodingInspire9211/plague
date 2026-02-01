@@ -74,3 +74,14 @@ theme_override_fonts/font = ExtResource("2_font")
 theme_override_font_sizes/font_size = 16
 text = "Dialogue text goes here..."
 autowrap_mode = 3
+
+[node name="ChoicesBox" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=161246910]
+layout_mode = 2
+
+[node name="OptionA" type="Button" parent="Panel/MarginContainer/VBoxContainer/ChoicesBox" unique_id=128227196]
+layout_mode = 2
+text = "Yes"
+
+[node name="OptionB" type="Button" parent="Panel/MarginContainer/VBoxContainer/ChoicesBox" unique_id=1129682714]
+layout_mode = 2
+text = "No"

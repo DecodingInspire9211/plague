@@ -22,6 +22,9 @@ wander_speed = 30.0
 peasant_frames = null
 peasant_pngs = Array[Texture2D]([])
 idle_fps = 4.0
+required_medicine = null
+start_sick_on_ready = false
+starting_disease = null
 display_name = "person"
 interaction_prompt = "Talk (E)"
 
