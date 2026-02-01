@@ -1,64 +1,59 @@
 [gd_scene format=3 uid="uid://c8v1qr8q2kxy0"]
 
-[ext_resource type="Script" path="res://Scripts/inventory/shop_ui.gd" id="1_shop"]
+[ext_resource type="Script" uid="uid://becsjds3h6063" path="res://Scripts/inventory/shop_ui.gd" id="1_shop"]
 
-[node name="ShopUI" type="CanvasLayer"]
+[node name="ShopUI" type="CanvasLayer" unique_id=1590230810]
 process_mode = 3
 script = ExtResource("1_shop")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=1613047541]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = -100.0
-offset_right = 150.0
-offset_bottom = 100.0
+offset_left = -200.0
+offset_top = -120.0
+offset_right = 200.0
+offset_bottom = 120.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=520808264]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
 mouse_filter = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=2050006532]
 layout_mode = 2
 mouse_filter = 2
+theme_override_constants/separation = 3
 
-[node name="Title" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=491611182]
 layout_mode = 2
 text = "Shop"
 horizontal_alignment = 1
-mouse_filter = 2
 
-[node name="GoldDisplay" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Gold: 0"
-horizontal_alignment = 1
-mouse_filter = 2
-
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=1397536533]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="ItemList" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="ItemList" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer" unique_id=58131315]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
+theme_override_constants/separation = 1
 
-[node name="CloseButton" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="CloseButton" type="Button" parent="Panel/MarginContainer/VBoxContainer" unique_id=621716528]
 layout_mode = 2
 text = "Close"
 

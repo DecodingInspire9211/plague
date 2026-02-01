@@ -39,6 +39,7 @@ func _ready() -> void:
 	# Automatically find player in scene
 	call_deferred("_find_player")
 	current_scene = get_tree().current_scene
+	print("GameManager: Initialized with %d gold" % player_gold)
 
 
 func _find_player() -> void:

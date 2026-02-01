@@ -1,11 +1,10 @@
-# player.gd
 extends CharacterBody2D
 
 const WALK := 100.0
 const RUN := 200.0
 var SPEED := WALK
 
-@export var interaction_range := 50.0
+@export var interaction_range := 25.0
 
 @onready var interaction_raycast: RayCast2D = $InteractionRaycast
 @onready var inventory: Inventory = $Inventory

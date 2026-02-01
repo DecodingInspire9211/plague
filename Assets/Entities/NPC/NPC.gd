@@ -206,29 +206,61 @@ func apply_medicine(medicine: Item) -> bool:
 	if not is_sick or not current_disease:
 		print("%s is not sick" % display_name)
 		return false
-	
+
 	if not medicine.is_medicine:
 		print("%s is not medicine" % medicine.item_name)
 		return false
-	
+
 	# Check if medicine cures this disease
-	if not medicine.cures_diseases.has(current_disease.disease_name):
-		print("%s doesn't cure %s" % [medicine.item_name, current_disease.disease_name])
-		return false
-	
+	var can_cure = medicine.cures_diseases.has(current_disease.disease_name)
+
+	if not can_cure:
+		# Medicine doesn't cure this disease, but it can still help (tending)
+		if medicine.healing_amount > 0:
+			heal(medicine.healing_amount)
+
+			# Small reward for tending
+			var game_manager = get_node_or_null("/root/GameManager")
+			if game_manager and game_manager.has_method("add_gold"):
+				var tend_reward = 5
+				game_manager.add_gold(tend_reward)
+				print("%s tended to %s and received %d guilders" % [medicine.item_name, display_name, tend_reward])
+
+			return true
+		else:
+			print("%s doesn't cure %s" % [medicine.item_name, current_disease.disease_name])
+			return false
+
 	# Success rate check
 	if randf() > medicine.cure_success_rate:
+		# Failed to cure, but still counts as tending
+		if medicine.healing_amount > 0:
+			heal(medicine.healing_amount)
+
+		# Small reward for tending (treatment failed but tried)
+		var game_manager = get_node_or_null("/root/GameManager")
+		if game_manager and game_manager.has_method("add_gold"):
+			var tend_reward = 5
+			game_manager.add_gold(tend_reward)
+			print("Treatment failed, but %s received %d guilders for tending" % [display_name, tend_reward])
+
 		print("Treatment failed!")
-		return false
-	
+		return true
+
 	# Cure the disease
 	cure_disease()
-	
+
 	# Apply healing
 	if medicine.healing_amount > 0:
 		heal(medicine.healing_amount)
-	
-	print("%s cured %s with %s!" % [display_name, current_disease.disease_name, medicine.item_name])
+
+	# Larger reward for curing
+	var game_manager = get_node_or_null("/root/GameManager")
+	if game_manager and game_manager.has_method("add_gold"):
+		var cure_reward = 20
+		game_manager.add_gold(cure_reward)
+		print("%s cured %s with %s and received %d guilders!" % [display_name, current_disease.disease_name, medicine.item_name, cure_reward])
+
 	return true
 
 

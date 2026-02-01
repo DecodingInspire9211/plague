@@ -14,8 +14,21 @@ extends Resource
 
 func use(user: Node) -> bool:
 	print("%s used %s" % [user.name, item_name])
-	
+
 	if is_medicine:
-		return false
-	
+		# Try to apply medicine to the current interactable NPC
+		var target_npc: NPC = null
+
+		# Check if the user (player) has a current_interactable
+		if user.has("current_interactable") and user.current_interactable:
+			if user.current_interactable is NPC:
+				target_npc = user.current_interactable
+
+		if target_npc:
+			var success = target_npc.apply_medicine(self)
+			return success  # Consume the item if successfully applied
+		else:
+			print("No NPC to apply medicine to!")
+			return false
+
 	return false

@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="ShopItem" load_steps=3 format=3]
+[gd_resource type="Resource" script_class="ShopItem" format=3 uid="uid://eewdcy3quxh5"]
 
 [ext_resource type="Script" path="res://Scripts/inventory/shop_item.gd" id="1_1"]
-[ext_resource type="Resource" uid="uid://your_item_uid" path="res://Data/test.tres" id="2_1"]
+[ext_resource type="Resource" uid="uid://bofgqfpqvyn72" path="res://Data/medicine.tres" id="1_1rood"]
 
 [resource]
 script = ExtResource("1_1")
-item = ExtResource("2_1")
-price = 25
-stock = 5
+item = ExtResource("1_1rood")
+price = 5
+stock = 128

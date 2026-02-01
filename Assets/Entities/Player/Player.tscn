@@ -4,8 +4,9 @@
 [ext_resource type="SpriteFrames" uid="uid://dg4dv5evtthaq" path="res://Assets/Entities/Player/player.tres" id="2_46rqe"]
 [ext_resource type="Script" uid="uid://iboxnoufrdxh" path="res://Scripts/inventory/inventory.gd" id="3_0ppbw"]
 [ext_resource type="PackedScene" uid="uid://diib7ke5j20qq" path="res://Scripts/inventory/inventory_ui.tscn" id="4_ow5bo"]
-[ext_resource type="PackedScene" uid="uid://hotbar_ui_scene" path="res://Scripts/inventory/hotbar_ui.tscn" id="5_hotbar"]
-[ext_resource type="PackedScene" uid="uid://dialogue_ui_scene" path="res://Scripts/ui/dialogue_ui.tscn" id="6_dialogue"]
+[ext_resource type="PackedScene" uid="uid://7hdik3ilr3mq" path="res://Scripts/inventory/hotbar_ui.tscn" id="5_hotbar"]
+[ext_resource type="PackedScene" path="res://Scripts/ui/dialogue_ui.tscn" id="6_dialogue"]
+[ext_resource type="PackedScene" uid="uid://dsacj5uu1pdkn" path="res://Scripts/ui/gold_display.tscn" id="7_gold_display"]
 
 [sub_resource type="GDScript" id="GDScript_n3sr1"]
 script/source = "extends AnimatedSprite2D
@@ -65,6 +66,10 @@ script = ExtResource("3_0ppbw")
 [node name="InventoryUI" parent="UILayer" unique_id=852096872 instance=ExtResource("4_ow5bo")]
 custom_minimum_size = Vector2(64, 64)
 
-[node name="HotbarUI" parent="UILayer" instance=ExtResource("5_hotbar")]
+[node name="HotbarUI" parent="UILayer" unique_id=2002103191 instance=ExtResource("5_hotbar")]
 
-[node name="DialogueUI" parent="UILayer" instance=ExtResource("6_dialogue")]
+[node name="DialogueUI" parent="UILayer" unique_id=54625446 instance=ExtResource("6_dialogue")]
+
+[node name="GoldDisplay" parent="UILayer" instance=ExtResource("7_gold_display")]
+
+[node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=1457892667]

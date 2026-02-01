@@ -5,7 +5,6 @@ signal item_purchased(item: Item, quantity: int, total_cost: int)
 signal shop_closed
 
 @onready var shop_title: Label = $Panel/MarginContainer/VBoxContainer/Title
-@onready var gold_label: Label = $Panel/MarginContainer/VBoxContainer/GoldDisplay
 @onready var item_list: VBoxContainer = $Panel/MarginContainer/VBoxContainer/ScrollContainer/ItemList
 @onready var close_button: Button = $Panel/MarginContainer/VBoxContainer/CloseButton
 
@@ -38,8 +37,6 @@ func _refresh_shop() -> void:
 		for child in item_list.get_children():
 			child.queue_free()
 	
-	_update_gold_display()
-	
 	for shop_item in shop_items:
 		if shop_item.is_available:
 			_create_item_entry(shop_item)
@@ -47,15 +44,17 @@ func _refresh_shop() -> void:
 
 func _create_item_entry(shop_item: ShopItem) -> void:
 	var entry := HBoxContainer.new()
-	entry.custom_minimum_size = Vector2(0, 32)
+	entry.size_flags_horizontal = Control.SIZE_FILL
+	entry.alignment = BoxContainer.ALIGNMENT_BEGIN
 	
 	# Item icon
 	if shop_item.item.item_icon:
 		var icon := TextureRect.new()
 		icon.texture = shop_item.item.item_icon
-		icon.custom_minimum_size = Vector2(24, 24)
+		icon.custom_minimum_size = Vector2(16, 16)
 		icon.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
 		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		icon.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 		entry.add_child(icon)
 	
 	# Item name and description
@@ -70,6 +69,8 @@ func _create_item_entry(shop_item: ShopItem) -> void:
 	desc_label.text = shop_item.item.item_desc
 	desc_label.add_theme_font_size_override("font_size", 8)
 	desc_label.modulate = Color(0.8, 0.8, 0.8)
+	desc_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	desc_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	info.add_child(desc_label)
 	
 	entry.add_child(info)
@@ -79,17 +80,21 @@ func _create_item_entry(shop_item: ShopItem) -> void:
 		var stock_label := Label.new()
 		stock_label.text = "x%d" % shop_item.stock
 		stock_label.custom_minimum_size = Vector2(40, 0)
+		stock_label.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 		entry.add_child(stock_label)
-	
+
 	# Price and buy button
 	var price_label := Label.new()
-	price_label.text = "%d Gold" % shop_item.price
+	price_label.add_theme_font_size_override("font_size", 12)
+	price_label.text = "%d Guilders" % shop_item.price
 	price_label.custom_minimum_size = Vector2(60, 0)
+	price_label.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 	entry.add_child(price_label)
-	
+
 	var buy_button := Button.new()
 	buy_button.text = "Buy"
 	buy_button.custom_minimum_size = Vector2(50, 0)
+	buy_button.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 	buy_button.pressed.connect(_on_buy_pressed.bind(shop_item))
 	entry.add_child(buy_button)
 	
@@ -125,13 +130,6 @@ func _on_buy_pressed(shop_item: ShopItem) -> void:
 				game_manager.add_gold(shop_item.price)
 				shop_item.restock(1)
 				print("Inventory full!")
-
-
-func _update_gold_display() -> void:
-	if gold_label:
-		var game_manager = get_node_or_null("/root/GameManager")
-		if game_manager:
-			gold_label.text = "Gold: %d" % game_manager.get_gold()
 
 
 func _on_close_pressed() -> void:

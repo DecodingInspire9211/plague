@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://bofgqfpqvyn72"]
+
+[ext_resource type="Texture2D" uid="uid://ba7gm5mfkxjb6" path="res://Assets/Items/plague_cure.png" id="1_rwugh"]
+[ext_resource type="Script" uid="uid://56xbv0o6cs8w" path="res://Scripts/inventory/item.gd" id="2_letak"]
+
+[resource]
+script = ExtResource("2_letak")
+item_name = "Parkemed"
+item_desc = "An austrians \"must have\"-medicine"
+item_icon = ExtResource("1_rwugh")
+is_medicine = true
+cures_diseases = Array[String](["Plague"])
+healing_amount = 10
+cure_success_rate = 0.5

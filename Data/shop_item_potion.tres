@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ShopItem" format=3 uid="uid://buh7knk5hpluq"]
 
-[ext_resource type="Script" uid="uid://crw2pmh8l55ud" path="res://Scripts/inventory/shop_item.gd" id="1_1"]
+[ext_resource type="Script" path="res://Scripts/inventory/shop_item.gd" id="1_1"]
 [ext_resource type="Texture2D" uid="uid://ba7gm5mfkxjb6" path="res://Assets/Items/plague_cure.png" id="1_vh8h3"]
 [ext_resource type="Script" uid="uid://56xbv0o6cs8w" path="res://Scripts/inventory/item.gd" id="2_1"]
 
