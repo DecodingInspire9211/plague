@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bb1k08dhupl44"]
 
 [ext_resource type="Script" uid="uid://cnu6hm8ksopgr" path="res://Assets/Entities/NPC/NPC.gd" id="1_anm57"]
+[ext_resource type="FontFile" uid="uid://d6eahjqhbgea" path="res://Resources/Sterling.ttf" id="2_font"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5m64o"]
 
@@ -11,20 +12,21 @@ content_margin_left = 6.0
 content_margin_top = 2.0
 content_margin_right = 6.0
 content_margin_bottom = 2.0
-bg_color = Color(0.21641576, 0.21641576, 0.21641564, 1)
+bg_color = Color(0.121569, 0.0980392, 0.0627451, 0.9)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.27230796, 0.27230746, 0.27230766, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
+border_color = Color(0.6, 0.5, 0.3, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 corner_detail = 2
 
 [sub_resource type="LabelSettings" id="LabelSettings_anm57"]
-font_size = 8
+font = ExtResource("2_font")
+font_size = 9
 
 [node name="NPC" type="Node2D" unique_id=522452719]
 script = ExtResource("1_anm57")
@@ -57,7 +59,9 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_anm57")
 
 [node name="Label" type="Label" parent="InteractionPrompt/PanelContainer" unique_id=29840377]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
+theme_override_colors/font_color = Color(1, 0.913725, 0.635294, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 9
 label_settings = SubResource("LabelSettings_anm57")
 horizontal_alignment = 3
 vertical_alignment = 3

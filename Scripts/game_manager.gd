@@ -12,6 +12,7 @@ signal dialogue_started(npc_name: String)
 signal dialogue_ended
 signal scene_changing(scene_path: String)
 signal scene_changed
+signal gold_changed(new_amount: int)
 
 # Game state
 enum GameState {
@@ -145,12 +146,14 @@ func collect_item(item: Item, quantity: int) -> void:
 func add_gold(amount: int) -> void:
 	player_gold += amount
 	print("Gold: %d (+%d)" % [player_gold, amount])
+	gold_changed.emit(player_gold)
 
 
 func remove_gold(amount: int) -> bool:
 	if player_gold >= amount:
 		player_gold -= amount
 		print("Gold: %d (-%d)" % [player_gold, amount])
+		gold_changed.emit(player_gold)
 		return true
 	return false
 

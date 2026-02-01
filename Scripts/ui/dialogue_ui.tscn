@@ -1,53 +1,76 @@
-[gd_scene load_steps=2 format=3 uid="uid://dialogue_ui_scene"]
+[gd_scene format=3 uid="uid://rh38kksksbob"]
 
-[ext_resource type="Script" path="res://Scripts/ui/dialogue_ui.gd" id="1_dialogue"]
+[ext_resource type="Script" uid="uid://dgvw1vhkym2yn" path="res://Scripts/ui/dialogue_ui.gd" id="1_dialogue"]
+[ext_resource type="FontFile" uid="uid://d6eahjqhbgea" path="res://Resources/Sterling.ttf" id="2_font"]
 
-[node name="DialogueUI" type="Control"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dialogue"]
+bg_color = Color(0.121569, 0.0980392, 0.0627451, 0.92)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6, 0.5, 0.3, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0, 0, 0, 0.4)
+shadow_size = 4
+shadow_offset = Vector2(2, 2)
+
+[node name="DialogueUI" type="Control" unique_id=1537797089]
 layout_mode = 3
-anchors_preset = 3
-anchor_left = 1.0
+anchors_preset = 7
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -260.0
-offset_top = -90.0
-offset_right = -10.0
-offset_bottom = -10.0
-grow_horizontal = 0
+offset_left = -216.0
+offset_top = -110.0
+offset_right = 216.0
+offset_bottom = -20.0
+grow_horizontal = 2
 grow_vertical = 0
+size_flags_horizontal = 3
 script = ExtResource("1_dialogue")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=480387473]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dialogue")
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=727776580]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=1480956731]
 layout_mode = 2
+theme_override_constants/separation = 6
 
-[node name="NameLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="NameLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=1403254663]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.5, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 14
 text = "NPC Name"
-theme_override_font_sizes/font_size = 10
 
-[node name="DialogueLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="DialogueLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=1910181857]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.95, 0.95, 0.9, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 16
 text = "Dialogue text goes here..."
-theme_override_font_sizes/font_size = 9
 autowrap_mode = 3

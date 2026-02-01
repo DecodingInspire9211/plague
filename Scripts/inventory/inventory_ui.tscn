@@ -1,19 +1,50 @@
 [gd_scene format=3 uid="uid://diib7ke5j20qq"]
 
 [ext_resource type="Script" uid="uid://t1e5tlvr165l" path="res://Scripts/inventory/inventory_ui.gd" id="1_puvt3"]
+[ext_resource type="FontFile" uid="uid://cqmfplkikpj6i" path="res://Resources/Sterling.ttf" id="2_font"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_inventory"]
+bg_color = Color(0.15, 0.12, 0.08, 0.95)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.8, 0.647059, 0.2, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.5)
+shadow_size = 6
+shadow_offset = Vector2(3, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tooltip"]
+bg_color = Color(0.1, 0.08, 0.05, 0.98)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7, 0.58, 0.35, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0, 0, 0, 0.6)
+shadow_size = 4
+shadow_offset = Vector2(2, 2)
 
 [node name="InventoryUI" type="Control" unique_id=852096872]
-custom_minimum_size = Vector2(280, 180)
+custom_minimum_size = Vector2(300, 220)
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -140.0
-offset_top = -90.0
-offset_right = 140.0
-offset_bottom = 90.0
+offset_left = -150.0
+offset_top = -110.0
+offset_right = 150.0
+offset_bottom = 110.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_puvt3")
@@ -25,30 +56,79 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_inventory")
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=891674083]
 layout_mode = 2
-theme_override_constants/margin_left = 6
-theme_override_constants/margin_top = 6
-theme_override_constants/margin_right = 6
-theme_override_constants/margin_bottom = 6
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=459490829]
 layout_mode = 2
-theme_override_constants/separation = 4
+theme_override_constants/separation = 8
 
 [node name="Title" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=387814296]
-custom_minimum_size = Vector2(0, 12)
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "Inventory
-"
+theme_override_colors/font_color = Color(1, 0.913725, 0.635294, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 18
+text = "Inventory"
 horizontal_alignment = 1
 
 [node name="ItemGrid" type="GridContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=1597143197]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
-theme_override_constants/h_separation = 3
-theme_override_constants/v_separation = 3
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
 columns = 5
+
+[node name="Tooltip" type="PanelContainer" parent="."]
+visible = false
+z_index = 100
+custom_minimum_size = Vector2(180, 60)
+layout_mode = 0
+offset_right = 180.0
+offset_bottom = 60.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tooltip")
+
+[node name="MarginContainer" type="MarginContainer" parent="Tooltip"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Tooltip/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="Title" type="Label" parent="Tooltip/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.913725, 0.635294, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 13
+text = "Item Name"
+
+[node name="Description" type="Label" parent="Tooltip/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.9, 0.85, 0.75, 1)
+theme_override_font_sizes/font_size = 10
+text = "Item description goes here"
+autowrap_mode = 3
+
+[node name="Stats" type="Label" parent="Tooltip/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.6, 0.85, 0.6, 1)
+theme_override_font_sizes/font_size = 9
+text = ""
+autowrap_mode = 3

@@ -10,10 +10,10 @@ var is_hovered: bool = false
 var is_dragging: bool = false
 var drag_offset: Vector2 = Vector2.ZERO
 
-const HOVER_COLOR := Color(1.2, 1.2, 1.2, 1.0)
+const HOVER_COLOR := Color(1.3, 1.25, 1.1, 1.0)
 const NORMAL_COLOR := Color(1, 1, 1, 1)
-const EMPTY_COLOR := Color(1, 1, 1, 0.3)
-const DRAG_COLOR := Color(0.8, 0.8, 0.8, 0.7)
+const EMPTY_COLOR := Color(0.7, 0.7, 0.65, 0.5)
+const DRAG_COLOR := Color(0.9, 0.85, 0.7, 0.8)
 
 
 func _ready() -> void:

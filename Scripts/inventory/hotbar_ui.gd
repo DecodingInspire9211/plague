@@ -18,17 +18,17 @@ func _create_hotbar_slots() -> void:
 	for child in slot_container.get_children():
 		child.queue_free()
 	hotbar_slots.clear()
-	
+
 	hotbar_slots.resize(hotbar_size)
 	for i in hotbar_size:
 		var slot_ui := slot_ui_scene.instantiate()
 		slot_container.add_child(slot_ui)
 		hotbar_slots[i] = slot_ui
-		
-		slot_ui.custom_minimum_size = Vector2(24, 24)
+
+		slot_ui.custom_minimum_size = Vector2(36, 36)
 		slot_ui.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 		slot_ui.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-		
+
 func set_inventory(inv: Inventory) -> void:
 	inventory = inv
 	

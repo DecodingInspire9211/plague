@@ -8,6 +8,8 @@ signal shop_closed
 @onready var item_list: VBoxContainer = $Panel/MarginContainer/VBoxContainer/ScrollContainer/ItemList
 @onready var close_button: Button = $Panel/MarginContainer/VBoxContainer/CloseButton
 
+const STERLING_FONT := preload("res://Resources/Sterling.ttf")
+
 var shop_items: Array[ShopItem] = []
 var shop_name: String = "Shop"
 
@@ -55,58 +57,81 @@ func _create_item_entry(shop_item: ShopItem) -> void:
 	var entry := HBoxContainer.new()
 	entry.size_flags_horizontal = Control.SIZE_FILL
 	entry.alignment = BoxContainer.ALIGNMENT_BEGIN
-	
+	entry.add_theme_constant_override("separation", 8)
+
 	# Item icon
 	if shop_item.item.item_icon:
 		var icon := TextureRect.new()
 		icon.texture = shop_item.item.item_icon
-		icon.custom_minimum_size = Vector2(16, 16)
+		icon.custom_minimum_size = Vector2(20, 20)
 		icon.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
 		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		icon.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 		entry.add_child(icon)
-	
+
 	# Item name and description
 	var info := VBoxContainer.new()
 	info.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	
+	info.add_theme_constant_override("separation", 2)
+
 	var name_label := Label.new()
 	name_label.text = shop_item.item.item_name
+	name_label.add_theme_font_override("font", STERLING_FONT)
+	name_label.add_theme_font_size_override("font_size", 12)
+	name_label.add_theme_color_override("font_color", Color(0.95, 0.9, 0.8))
 	info.add_child(name_label)
-	
+
 	var desc_label := Label.new()
 	desc_label.text = shop_item.item.item_desc
-	desc_label.add_theme_font_size_override("font_size", 8)
-	desc_label.modulate = Color(0.8, 0.8, 0.8)
+	desc_label.add_theme_font_size_override("font_size", 9)
+	desc_label.modulate = Color(0.75, 0.75, 0.7)
 	desc_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	desc_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	info.add_child(desc_label)
-	
+
 	entry.add_child(info)
-	
+
 	# Stock display
 	if shop_item.stock >= 0:
 		var stock_label := Label.new()
 		stock_label.text = "x%d" % shop_item.stock
 		stock_label.custom_minimum_size = Vector2(40, 0)
 		stock_label.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+		stock_label.add_theme_font_override("font", STERLING_FONT)
+		stock_label.add_theme_font_size_override("font_size", 11)
+		stock_label.add_theme_color_override("font_color", Color(0.8, 0.8, 0.75))
 		entry.add_child(stock_label)
 
-	# Price and buy button
+	# Price display with coin icon
+	var price_container := HBoxContainer.new()
+	price_container.custom_minimum_size = Vector2(80, 0)
+	price_container.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+	price_container.add_theme_constant_override("separation", 3)
+
+	var coin_icon := Label.new()
+	coin_icon.text = "⚜"
+	coin_icon.add_theme_font_size_override("font_size", 12)
+	coin_icon.add_theme_color_override("font_color", Color(1, 0.85, 0.4))
+	price_container.add_child(coin_icon)
+
 	var price_label := Label.new()
+	price_label.add_theme_font_override("font", STERLING_FONT)
 	price_label.add_theme_font_size_override("font_size", 12)
-	price_label.text = "%d Guilders" % shop_item.price
-	price_label.custom_minimum_size = Vector2(60, 0)
-	price_label.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
-	entry.add_child(price_label)
+	price_label.text = "%d" % shop_item.price
+	price_label.add_theme_color_override("font_color", Color(1, 0.913725, 0.635294))
+	price_container.add_child(price_label)
+
+	entry.add_child(price_container)
 
 	var buy_button := Button.new()
 	buy_button.text = "Buy"
-	buy_button.custom_minimum_size = Vector2(50, 0)
+	buy_button.custom_minimum_size = Vector2(60, 24)
 	buy_button.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+	buy_button.add_theme_font_override("font", STERLING_FONT)
+	buy_button.add_theme_font_size_override("font_size", 12)
 	buy_button.pressed.connect(_on_buy_pressed.bind(shop_item))
 	entry.add_child(buy_button)
-	
+
 	item_list.add_child(entry)
 
 

@@ -132,24 +132,71 @@ func update_drag_preview(global_pos: Vector2) -> void:
 func show_tooltip(item: Item, slot_position: Vector2) -> void:
 	if not tooltip or not item:
 		return
-	
+
 	var tooltip_title := tooltip.get_node_or_null("MarginContainer/VBoxContainer/Title") as Label
 	var tooltip_desc := tooltip.get_node_or_null("MarginContainer/VBoxContainer/Description") as Label
-	
+	var tooltip_stats := tooltip.get_node_or_null("MarginContainer/VBoxContainer/Stats") as Label
+
 	if tooltip_title:
 		tooltip_title.text = item.item_name
-	
+
 	if tooltip_desc:
 		tooltip_desc.text = item.item_desc
-	
-	# Position tooltip near slot
-	tooltip.global_position = slot_position + Vector2(80, 0)
+
+	# Add stats for medicine items
+	if tooltip_stats:
+		var stats_text := ""
+		if item.is_medicine:
+			if item.healing_amount > 0:
+				stats_text += "Healing: +%d\n" % item.healing_amount
+			if item.cure_success_rate < 1.0:
+				stats_text += "Success Rate: %d%%\n" % (item.cure_success_rate * 100)
+			if not item.cures_diseases.is_empty():
+				stats_text += "Cures: %s" % ", ".join(item.cures_diseases)
+		tooltip_stats.text = stats_text
+		tooltip_stats.visible = stats_text != ""
+
+	# Position tooltip near slot with smart positioning
+	var offset := Vector2(50, 0)
+	var tooltip_pos := slot_position + offset
+
+	# Get viewport size to check bounds
+	var viewport_size := get_viewport_rect().size
+	var tooltip_size := tooltip.custom_minimum_size
+
+	# Adjust horizontal position if tooltip would go off-screen
+	if tooltip_pos.x + tooltip_size.x > viewport_size.x:
+		# Position to the left of the slot instead
+		tooltip_pos.x = slot_position.x - tooltip_size.x - 10
+
+	# Adjust vertical position if tooltip would go off-screen
+	if tooltip_pos.y + tooltip_size.y > viewport_size.y:
+		tooltip_pos.y = viewport_size.y - tooltip_size.y - 10
+
+	# Keep tooltip within bounds (minimum)
+	tooltip_pos.x = max(10, tooltip_pos.x)
+	tooltip_pos.y = max(10, tooltip_pos.y)
+
+	tooltip.global_position = tooltip_pos
+
+	# Smooth fade-in animation
+	tooltip.modulate = Color(1, 1, 1, 0)
 	tooltip.show()
+
+	var tween := create_tween()
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(tooltip, "modulate", Color(1, 1, 1, 1), 0.15)
 
 
 func hide_tooltip() -> void:
-	if tooltip:
-		tooltip.hide()
+	if tooltip and tooltip.visible:
+		# Smooth fade-out animation
+		var tween := create_tween()
+		tween.set_ease(Tween.EASE_IN)
+		tween.set_trans(Tween.TRANS_CUBIC)
+		tween.tween_property(tooltip, "modulate", Color(1, 1, 1, 0), 0.1)
+		tween.tween_callback(tooltip.hide)
 
 
 func split_stack(slot_index: int) -> void:
