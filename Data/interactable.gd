@@ -31,21 +31,24 @@ func _on_ready() -> void:
 ## Sets up the sprite node - handles both AnimatedSprite2D and Sprite2D
 func _setup_sprite() -> void:
 	sprite_node = get_node_or_null("AnimatedSprite2D")
+	if sprite_node:
+		return
 	
-	if sprite_node == null:
-		sprite_node = get_node_or_null("Sprite2D")
+	sprite_node = get_node_or_null("Sprite2D")
+	if sprite_node:
+		return
 	
-	if sprite_node == null:
-		for child in get_children():
-			if child is AnimatedSprite2D or child is Sprite2D:
-				sprite_node = child
-				break
+	# Search children only if not found by name
+	for child in get_children():
+		if child is AnimatedSprite2D or child is Sprite2D:
+			sprite_node = child
+			return
 
 
 func _setup_collision() -> void:
-	var collision_body = get_node_or_null("HitBox")
+	var collision_body := get_node_or_null("HitBox")
 	if collision_body:
-		collision_body.set_meta("interactable", self)
+		collision_body.set_meta("interactable", self )
 
 
 ## Main interaction method - override this in child classes

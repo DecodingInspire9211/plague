@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ShopItem" format=3 uid="uid://dcomf6rtcojo0"]
+
+[ext_resource type="Script" uid="uid://crw2pmh8l55ud" path="res://Scripts/inventory/shop_item.gd" id="1_1"]
+[ext_resource type="Texture2D" uid="uid://ba7gm5mfkxjb6" path="res://Assets/Items/plague_cure.png" id="1_vh8h3"]
+[ext_resource type="Script" uid="uid://56xbv0o6cs8w" path="res://Scripts/inventory/item.gd" id="2_1"]
+
+[sub_resource type="Resource" id="1"]
+script = ExtResource("2_1")
+item_name = "Health Potion"
+item_desc = "Restores 50 health points"
+item_icon = ExtResource("1_vh8h3")
+max_stack_size = 10
+healing_amount = 50
+
+[resource]
+script = ExtResource("1_1")
+item = SubResource("1")
+price = 15
+stock = 10

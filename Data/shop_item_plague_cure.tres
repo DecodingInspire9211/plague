@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ShopItem" format=3 uid="uid://grq0y5c73e26"]
+
+[ext_resource type="Script" uid="uid://crw2pmh8l55ud" path="res://Scripts/inventory/shop_item.gd" id="1_1"]
+[ext_resource type="Resource" uid="uid://drhnrf5siyhho" path="res://Data/plague_cure.tres" id="2_cure"]
+
+[resource]
+script = ExtResource("1_1")
+item = ExtResource("2_cure")
+price = 50
+stock = 3

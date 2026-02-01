@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://7hdik3ilr3mq"]
+
+[ext_resource type="Script" uid="uid://b6qpxa8i2i8d1" path="res://Scripts/inventory/hotbar_ui.gd" id="1_hotbar"]
+
+[node name="HotbarUI" type="Control" unique_id=209242972]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -232.0
+offset_top = -44.0
+offset_right = -52.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_hotbar")
+
+[node name="Panel" type="Panel" parent="." unique_id=571453917]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=1328222639]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer" unique_id=1981092798]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1

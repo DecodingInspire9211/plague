@@ -1,11 +1,37 @@
 extends NPC
 
-@export var items_for_sale: Array[String] = ["Potion", "Sword"]
-@export var item_prices: Array[int] = [10, 50]
+const SHOP_UI_SCENE = preload("res://Scripts/inventory/shop_ui.tscn")
 
-func _on_interact(interactor: Node) -> void:
-	super._on_interact(interactor)  # Shows normal dialogue
-	open_shop()
+@export var shop_items: Array[ShopItem] = []
+@export var shop_title: String = "Evelyn's Shop"
+
+var shop_ui_instance: CanvasLayer = null
+
+
+func _on_interact(_interactor: Node) -> void:
+	# Don't show normal dialogue, open shop instead
+	if not shop_items.is_empty():
+		open_shop()
+	else:
+		super._on_interact(_interactor)
+
 
 func open_shop() -> void:
-	print("Shop opened! Items: %s" % str(items_for_sale))
+	# Check if shop UI instance already exists
+	if shop_ui_instance and is_instance_valid(shop_ui_instance):
+		shop_ui_instance.open_shop(shop_items, shop_title)
+		return
+	
+	# Create new shop UI instance
+	shop_ui_instance = SHOP_UI_SCENE.instantiate()
+	get_tree().root.add_child(shop_ui_instance)
+	shop_ui_instance.open_shop(shop_items, shop_title)
+	
+	# Connect close signal to clean up
+	if shop_ui_instance.has_signal("shop_closed"):
+		shop_ui_instance.shop_closed.connect(_on_shop_closed)
+
+
+func _on_shop_closed() -> void:
+	# Optional: cleanup or additional logic when shop closes
+	pass

@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="Item" format=3 uid="uid://cftc7kcbrigd0"]
-
-[ext_resource type="Texture2D" uid="uid://c7gvwewowxro5" path="res://Resources/icon.svg" id="1_ha4n1"]
-[ext_resource type="Script" uid="uid://56xbv0o6cs8w" path="res://Scripts/inventory/item.gd" id="1_r46jl"]
-
-[resource]
-script = ExtResource("1_r46jl")
-item_icon = ExtResource("1_ha4n1")
-metadata/_custom_type_script = "uid://56xbv0o6cs8w"

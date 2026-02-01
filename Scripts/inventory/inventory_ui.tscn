@@ -3,17 +3,17 @@
 [ext_resource type="Script" uid="uid://t1e5tlvr165l" path="res://Scripts/inventory/inventory_ui.gd" id="1_puvt3"]
 
 [node name="InventoryUI" type="Control" unique_id=852096872]
-custom_minimum_size = Vector2(200, 200)
+custom_minimum_size = Vector2(280, 180)
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -100.0
-offset_right = 100.0
-offset_bottom = 100.0
+offset_left = -140.0
+offset_top = -90.0
+offset_right = 140.0
+offset_bottom = 90.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_puvt3")
@@ -28,18 +28,19 @@ grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=891674083]
 layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=459490829]
 layout_mode = 2
-theme_override_constants/separation = 8
+theme_override_constants/separation = 4
 
 [node name="Title" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=387814296]
-custom_minimum_size = Vector2(0, 16)
+custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "Inventory
 "
 horizontal_alignment = 1
@@ -48,6 +49,6 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
-theme_override_constants/h_separation = 4
-theme_override_constants/v_separation = 4
+theme_override_constants/h_separation = 3
+theme_override_constants/v_separation = 3
 columns = 5

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ShopItem" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://Scripts/inventory/shop_item.gd" id="1_1"]
+[ext_resource type="Resource" uid="uid://your_item_uid" path="res://Data/test.tres" id="2_1"]
+
+[resource]
+script = ExtResource("1_1")
+item = ExtResource("2_1")
+price = 25
+stock = 5
