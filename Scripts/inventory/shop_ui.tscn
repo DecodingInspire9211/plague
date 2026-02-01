@@ -4,15 +4,16 @@
 
 [node name="ShopUI" type="CanvasLayer" unique_id=1590230810]
 process_mode = 3
+layer = 100
 script = ExtResource("1_shop")
 
-[node name="BackgroundOverlay" type="ColorRect" parent="."]
+[node name="BackgroundOverlay" type="ColorRect" parent="." unique_id=1482168876]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.7)
+color = Color(0.24115604, 0.24115604, 0.24115604, 1)
 
 [node name="Panel" type="Panel" parent="." unique_id=1613047541]
 anchors_preset = 8

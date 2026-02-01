@@ -11,9 +11,11 @@ var SPEED := WALK
 @onready var inventory_ui = $UILayer/InventoryUI
 @onready var hotbar_ui = $UILayer/HotbarUI
 @onready var dialogue_ui = $UILayer/DialogueUI
+@onready var walk_sound: AudioStreamPlayer2D = $WalkSound
 
 var last_direction := Vector2.DOWN
 var current_interactable: Interactable = null
+var is_walking := false
 
 func _ready():
 	SPEED = WALK
@@ -40,6 +42,7 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 	update_raycast_direction()
 	check_for_interactable()
+	update_walk_sound()
 
 
 func _unhandled_input(event):
@@ -103,3 +106,20 @@ func check_for_interactable() -> void:
 func attempt_interaction() -> void:
 	if current_interactable and current_interactable.is_interactable:
 		current_interactable.interact(self )
+
+
+func update_walk_sound() -> void:
+	var moving := velocity.length_squared() > 0
+	
+	if moving and not is_walking:
+		if walk_sound and not walk_sound.playing:
+			walk_sound.play()
+		is_walking = true
+	elif not moving and is_walking:
+		if walk_sound:
+			walk_sound.stop()
+		is_walking = false
+	
+	# Adjust pitch based on speed
+	if walk_sound and is_walking:
+		walk_sound.pitch_scale = 1.5 if SPEED == RUN else 1.0

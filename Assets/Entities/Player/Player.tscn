@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://7hdik3ilr3mq" path="res://Scripts/inventory/hotbar_ui.tscn" id="5_hotbar"]
 [ext_resource type="PackedScene" path="res://Scripts/ui/dialogue_ui.tscn" id="6_dialogue"]
 [ext_resource type="PackedScene" uid="uid://dsacj5uu1pdkn" path="res://Scripts/ui/gold_display.tscn" id="7_gold_display"]
+[ext_resource type="AudioStream" path="res://Resources/Audio/walkfhstp.ogg" id="8_walk_sound"]
 
 [sub_resource type="GDScript" id="GDScript_n3sr1"]
 script/source = "extends AnimatedSprite2D
@@ -73,3 +74,8 @@ custom_minimum_size = Vector2(64, 64)
 [node name="GoldDisplay" parent="UILayer" instance=ExtResource("7_gold_display")]
 
 [node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=1457892667]
+
+[node name="WalkSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_walk_sound")
+volume_db = -5.0
+pitch_scale = 1.0

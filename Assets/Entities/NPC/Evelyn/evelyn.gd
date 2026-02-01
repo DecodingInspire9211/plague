@@ -8,7 +8,7 @@ const SHOP_UI_SCENE = preload("res://Scripts/inventory/shop_ui.tscn")
 @export var randomize_items: bool = true
 @export var randomize_interval: float = 60.0 # Seconds between randomization
 @export var min_items_available: int = 2
-@export var max_items_available: int = 4
+@export var max_items_available: int = 3
 
 var shop_ui_instance: CanvasLayer = null
 var randomize_timer: Timer = null
@@ -16,6 +16,12 @@ var randomize_timer: Timer = null
 
 func _ready() -> void:
 	super._ready()
+	
+	# Duplicate shop items to avoid modifying the original resources
+	var duplicated_items: Array[ShopItem] = []
+	for item in shop_items:
+		duplicated_items.append(item.duplicate())
+	shop_items = duplicated_items
 
 	if randomize_items and not shop_items.is_empty():
 		# Create and configure the randomize timer
@@ -51,6 +57,8 @@ func _randomize_available_items() -> void:
 		if random_index not in available_indices:
 			available_indices.append(random_index)
 			shop_items[random_index].is_available = true
+
+	print("Evelyn's Shop: %d items available" % num_available)
 
 	# Refresh the shop UI if it's currently open
 	if shop_ui_instance and is_instance_valid(shop_ui_instance) and shop_ui_instance.visible:
