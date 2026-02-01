@@ -1,7 +1,8 @@
 extends Area2D
 
-@export var playground_scene := "res://Scenes/Playground.tscn"
-@export var tavern_scene := "res://Scenes/tavern.tscn"
+@export_file("*.tscn") var goal: String
+@export var use_spawn_position: bool = false
+@export var spawn_position: Vector2 = Vector2.ZERO
 
 var changing := false
 
@@ -13,13 +14,9 @@ func _on_body_entered(body: Node) -> void:
 		return
 	if !body.is_in_group("player"):
 		return
-
-	var current_path := get_tree().current_scene.scene_file_path
-
-	# If we're in Tavern -> go to Playground, otherwise -> go to Tavern
-	var next_scene := tavern_scene
-	if current_path == tavern_scene:
-		next_scene = playground_scene
+	if goal.is_empty():
+		push_warning("Area2D: No goal scene set!")
+		return
 
 	changing = true
-	get_tree().change_scene_to_file(next_scene)
+	GameManager.change_scene(goal, spawn_position, use_spawn_position)

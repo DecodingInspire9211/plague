@@ -28,6 +28,10 @@ var current_state: GameState = GameState.PLAYING
 var player: CharacterBody2D = null
 var current_scene: Node = null
 
+# Spawn position for scene transitions
+var spawn_position: Vector2 = Vector2.ZERO
+var use_spawn_position: bool = false
+
 # Game currency
 var player_gold: int = 100 # Starting gold
 
@@ -46,6 +50,11 @@ func _find_player() -> void:
 	player = _find_node_by_type(get_tree().root, "CharacterBody2D", "player")
 	if player:
 		print("GameManager: Player found - %s" % player.name)
+		# Apply spawn position if set
+		if use_spawn_position:
+			print("GameManager: Moving player to spawn position: %s" % spawn_position)
+			player.global_position = spawn_position
+			use_spawn_position = false
 	else:
 		push_warning("GameManager: Player not found in scene")
 
@@ -94,15 +103,27 @@ func toggle_pause() -> void:
 
 
 # Scene management
-func change_scene(scene_path: String) -> void:
+func change_scene(scene_path: String, target_position: Vector2 = Vector2.ZERO, use_position: bool = false) -> void:
 	current_state = GameState.LOADING
 	scene_changing.emit(scene_path)
 	
-	get_tree().call_deferred("change_scene_to_file", scene_path)
-	await get_tree().tree_changed
+	# Store spawn position for after scene loads
+	spawn_position = target_position
+	use_spawn_position = use_position
+	
+	# Use call_deferred to avoid removing CollisionObjects during physics callback
+	call_deferred("_deferred_change_scene", scene_path)
+
+
+func _deferred_change_scene(scene_path: String) -> void:
+	get_tree().change_scene_to_file(scene_path)
+	
+	# Wait for the new scene to be fully ready
+	await get_tree().process_frame
+	await get_tree().process_frame
 	
 	current_scene = get_tree().current_scene
-	call_deferred("_find_player")
+	_find_player()
 	current_state = GameState.PLAYING
 	scene_changed.emit()
 

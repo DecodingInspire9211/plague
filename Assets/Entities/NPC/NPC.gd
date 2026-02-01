@@ -8,7 +8,7 @@ extends Interactable
 @export var max_health: int = 100
 @export var can_get_sick: bool = true
 
-@onready var prompt_ui: Control = $InteractionPrompt
+@onready var prompt_ui: Control = get_node_or_null("InteractionPrompt")
 
 var current_dialogue_index: int = 0
 var current_health: int = 100
