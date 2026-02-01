@@ -23,6 +23,16 @@ func _ready():
 	SPEED = WALK
 	setup_raycast()
 	call_deferred("_setup_ui")
+	call_deferred("_apply_spawn_position")
+
+
+func _apply_spawn_position() -> void:
+	var root = get_tree().root
+	if root.has_meta("player_spawn_position"):
+		var pos = root.get_meta("player_spawn_position")
+		if pos != null:
+			global_position = pos
+			root.remove_meta("player_spawn_position")
 
 
 func _setup_ui() -> void:
