@@ -8,12 +8,12 @@ var SPEED := WALK
 @export var interaction_range := 50.0
 
 @onready var interaction_raycast: RayCast2D = $InteractionRaycast
-@onready var inventory: Inventory = $Inventory
 @onready var inventory_ui = $UILayer/InventoryUI
 @onready var hotbar_ui = $UILayer/HotbarUI
 @onready var dialogue_ui = $UILayer/DialogueUI
 @onready var walk_sound: AudioStreamPlayer2D = $WalkSound
 
+var inventory: Inventory = null  # Will be set from GameManager
 var last_direction := Vector2.DOWN
 var current_interactable: Interactable = null
 var is_walking := false
@@ -36,17 +36,16 @@ func _apply_spawn_position() -> void:
 
 
 func _setup_ui() -> void:
-	inventory_ui.set_inventory(inventory)
-	hotbar_ui.set_inventory(inventory)
+	# Get inventory from GameManager
+	if GameManager:
+		inventory = GameManager.get_player_inventory()
+
+	# Setup UI with the persistent inventory
+	if inventory:
+		inventory_ui.set_inventory(inventory)
+		hotbar_ui.set_inventory(inventory)
+
 	add_to_group("player")
-	_add_starting_items()
-
-
-func _add_starting_items() -> void:
-	var plague_cure = load("res://Data/plague_cure.tres")
-	if plague_cure:
-		inventory.add_item(plague_cure, 3)
-		print("Added Plague Cure x3 to inventory")
 
 
 func _physics_process(_delta: float) -> void:

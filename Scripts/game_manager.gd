@@ -36,11 +36,19 @@ var use_spawn_position: bool = false
 # Game currency
 var player_gold: int = 100 # Starting gold
 
+# Persistent inventory - managed by GameManager
+var player_inventory: Inventory = null
+
 # Settings
 var is_paused: bool = false
 
 
 func _ready() -> void:
+	# Create persistent inventory
+	player_inventory = Inventory.new()
+	player_inventory.max_slots = 20
+	add_child(player_inventory)
+
 	# Automatically find player in scene
 	call_deferred("_find_player")
 	current_scene = get_tree().current_scene
@@ -108,11 +116,11 @@ func toggle_pause() -> void:
 func change_scene(scene_path: String, target_position: Vector2 = Vector2.ZERO, use_position: bool = false) -> void:
 	current_state = GameState.LOADING
 	scene_changing.emit(scene_path)
-	
+
 	# Store spawn position for after scene loads
 	spawn_position = target_position
 	use_spawn_position = use_position
-	
+
 	# Use call_deferred to avoid removing CollisionObjects during physics callback
 	call_deferred("_deferred_change_scene", scene_path)
 
@@ -138,9 +146,7 @@ func get_player() -> CharacterBody2D:
 
 
 func get_player_inventory() -> Inventory:
-	if player and player.has_node("Inventory"):
-		return player.get_node("Inventory")
-	return null
+	return player_inventory
 
 
 func is_player_valid() -> bool:

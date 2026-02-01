@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://6urr48p7k66j" path="res://Assets/Entities/Player/player.gd" id="1_w2emo"]
 [ext_resource type="SpriteFrames" uid="uid://dg4dv5evtthaq" path="res://Assets/Entities/Player/player.tres" id="2_46rqe"]
-[ext_resource type="Script" uid="uid://iboxnoufrdxh" path="res://Scripts/inventory/inventory.gd" id="3_0ppbw"]
 [ext_resource type="PackedScene" uid="uid://diib7ke5j20qq" path="res://Scripts/inventory/inventory_ui.tscn" id="4_ow5bo"]
 [ext_resource type="PackedScene" uid="uid://7hdik3ilr3mq" path="res://Scripts/inventory/hotbar_ui.tscn" id="5_hotbar"]
 [ext_resource type="PackedScene" path="res://Scripts/ui/dialogue_ui.tscn" id="6_dialogue"]
@@ -58,9 +57,6 @@ shape = SubResource("RectangleShape2D_ow5bo")
 position_smoothing_speed = 10.0
 
 [node name="InteractionRaycast" type="RayCast2D" parent="." unique_id=1856822038]
-
-[node name="Inventory" type="Node" parent="." unique_id=2016001203]
-script = ExtResource("3_0ppbw")
 
 [node name="UILayer" type="CanvasLayer" parent="." unique_id=123725457]
 
