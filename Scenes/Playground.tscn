@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://d0depdhk5cc6v" path="res://Assets/Entities/Player/Player.tscn" id="1_iualk"]
 [ext_resource type="PackedScene" uid="uid://3nfqnyi1fciq" path="res://Assets/Entities/NPC/Bob/bob.tscn" id="2_exwnq"]
 [ext_resource type="PackedScene" uid="uid://bf0il6nk7d8fm" path="res://Assets/Entities/NPC/Evelyn/evelyn.tscn" id="3_eqbnc"]
+[ext_resource type="Script" uid="uid://d02p4n56oxifp" path="res://Scripts/area_2d.gd" id="5_npy7o"]
 
 [sub_resource type="Gradient" id="Gradient_exwnq"]
 
@@ -564,6 +565,9 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_npy7o")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a4k3g"]
+size = Vector2(57, 13)
+
 [node name="Playground" type="Node2D" unique_id=1353364668]
 
 [node name="Sprite2D2" type="Sprite2D" parent="." unique_id=919224487]
@@ -592,3 +596,10 @@ tile_set = SubResource("TileSet_npy7o")
 [node name="TileMapLayer4" type="TileMapLayer" parent="." unique_id=1198468681]
 tile_map_data = PackedByteArray("AAAGAPz/AAADAAQAAAAHAPz/AAADAAQAAAAIAAMAAAADAAQAAAAJAAMAAAADAAQAAAAHAAMAAAADAAQAAAAKAAMAAAADAAQAAAD3//r/AAADAAQAAAAHAAQAAAABAAUAAAAKAAQAAAABAAUAAAD3/wQAAAAAAAUAAAD5/wQAAAACAAUAAAD1//v/AAAAAAQAAAD4//v/AAACAAQAAAD3//v/AAABAAQAAAAGAP3/AAABAAQAAAAIAP3/AAACAAQAAAAFAP3/AAAAAAQAAAAGAAQAAAAAAAQAAAALAAQAAAACAAQAAAD2//v/AAABAAMAAAAHAP3/AAAAAAMAAAAIAAQAAAAAAAMAAAD4/wQAAAAAAAMAAAAJAAQAAAABAAMAAAAKAAsAAAAHAAIAAAACAAoAAAAHAAIAAAAJAAsAAAAGAAIAAAABAAoAAAAGAAIAAAACAP3/AAAGAAIAAAADAP3/AAAHAAIAAAD5/woAAAAEAAQAAAAKAP//AAAEAAQAAAD7//v/AAAEAAQAAADy/wAAAAAEAAQAAAD7/wMAAAAFAAcAAAD8/wMAAAAGAAcAAAD9/wMAAAAHAAcAAADy//r/AAAHAAAAAAD+/wAAAAAFAAIAAAD+//f/AAADAAQAAAABAPf/AAADAAQAAAA=")
 tile_set = SubResource("TileSet_npy7o")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=825584508]
+script = ExtResource("5_npy7o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=152887350]
+position = Vector2(0, -213)
+shape = SubResource("RectangleShape2D_a4k3g")
