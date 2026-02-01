@@ -17,10 +17,10 @@ var is_sick: bool = false
 var is_cured: bool = false
 
 
-func _ready() -> void:
+func _on_ready() -> void:
 	if sprite_node is AnimatedSprite2D:
 		play_animation(idle_animation)
-	
+
 	current_health = max_health
 	_setup_prompt()
 
