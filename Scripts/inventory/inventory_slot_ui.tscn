@@ -17,7 +17,6 @@ corner_radius_bottom_left = 3
 
 [sub_resource type="LabelSettings" id="LabelSettings_quantity"]
 font = ExtResource("2_font")
-font_size = 11
 outline_size = 2
 outline_color = Color(0, 0, 0, 1)
 
@@ -58,7 +57,6 @@ stretch_mode = 5
 [node name="QuantityLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=459640174]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-text = ""
 label_settings = SubResource("LabelSettings_quantity")
 horizontal_alignment = 2
 vertical_alignment = 2

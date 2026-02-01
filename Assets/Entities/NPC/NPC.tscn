@@ -26,7 +26,7 @@ corner_detail = 2
 
 [sub_resource type="LabelSettings" id="LabelSettings_anm57"]
 font = ExtResource("2_font")
-font_size = 9
+font_size = 14
 
 [node name="NPC" type="Node2D" unique_id=522452719]
 script = ExtResource("1_anm57")
@@ -61,7 +61,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_anm57")
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.913725, 0.635294, 1)
 theme_override_fonts/font = ExtResource("2_font")
-theme_override_font_sizes/font_size = 9
+theme_override_font_sizes/font_size = 14
 label_settings = SubResource("LabelSettings_anm57")
 horizontal_alignment = 3
 vertical_alignment = 3

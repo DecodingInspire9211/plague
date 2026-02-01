@@ -77,13 +77,13 @@ func _create_item_entry(shop_item: ShopItem) -> void:
 	var name_label := Label.new()
 	name_label.text = shop_item.item.item_name
 	name_label.add_theme_font_override("font", STERLING_FONT)
-	name_label.add_theme_font_size_override("font_size", 12)
+	name_label.add_theme_font_size_override("font_size", 14)
 	name_label.add_theme_color_override("font_color", Color(0.95, 0.9, 0.8))
 	info.add_child(name_label)
 
 	var desc_label := Label.new()
 	desc_label.text = shop_item.item.item_desc
-	desc_label.add_theme_font_size_override("font_size", 9)
+	desc_label.add_theme_font_size_override("font_size", 11)
 	desc_label.modulate = Color(0.75, 0.75, 0.7)
 	desc_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	desc_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -98,7 +98,7 @@ func _create_item_entry(shop_item: ShopItem) -> void:
 		stock_label.custom_minimum_size = Vector2(40, 0)
 		stock_label.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 		stock_label.add_theme_font_override("font", STERLING_FONT)
-		stock_label.add_theme_font_size_override("font_size", 11)
+		stock_label.add_theme_font_size_override("font_size", 13)
 		stock_label.add_theme_color_override("font_color", Color(0.8, 0.8, 0.75))
 		entry.add_child(stock_label)
 
@@ -110,13 +110,13 @@ func _create_item_entry(shop_item: ShopItem) -> void:
 
 	var coin_icon := Label.new()
 	coin_icon.text = "⚜"
-	coin_icon.add_theme_font_size_override("font_size", 12)
+	coin_icon.add_theme_font_size_override("font_size", 14)
 	coin_icon.add_theme_color_override("font_color", Color(1, 0.85, 0.4))
 	price_container.add_child(coin_icon)
 
 	var price_label := Label.new()
 	price_label.add_theme_font_override("font", STERLING_FONT)
-	price_label.add_theme_font_size_override("font_size", 12)
+	price_label.add_theme_font_size_override("font_size", 14)
 	price_label.text = "%d" % shop_item.price
 	price_label.add_theme_color_override("font_color", Color(1, 0.913725, 0.635294))
 	price_container.add_child(price_label)
@@ -128,7 +128,7 @@ func _create_item_entry(shop_item: ShopItem) -> void:
 	buy_button.custom_minimum_size = Vector2(60, 24)
 	buy_button.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 	buy_button.add_theme_font_override("font", STERLING_FONT)
-	buy_button.add_theme_font_size_override("font_size", 12)
+	buy_button.add_theme_font_size_override("font_size", 14)
 	buy_button.pressed.connect(_on_buy_pressed.bind(shop_item))
 	entry.add_child(buy_button)
 
