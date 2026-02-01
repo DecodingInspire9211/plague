@@ -18,6 +18,15 @@ func _ready() -> void:
 		close_button.pressed.connect(_on_close_pressed)
 
 
+func _input(event: InputEvent) -> void:
+	if not visible:
+		return
+	
+	if event.is_action_pressed("player_interact") or event.is_action_pressed("ui_cancel"):
+		close_shop()
+		get_viewport().set_input_as_handled()
+
+
 func open_shop(items: Array[ShopItem], title: String = "Shop") -> void:
 	shop_items = items
 	shop_name = title

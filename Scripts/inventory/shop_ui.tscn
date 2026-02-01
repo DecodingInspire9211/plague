@@ -6,6 +6,14 @@
 process_mode = 3
 script = ExtResource("1_shop")
 
+[node name="BackgroundOverlay" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.7)
+
 [node name="Panel" type="Panel" parent="." unique_id=1613047541]
 anchors_preset = 8
 anchor_left = 0.5
