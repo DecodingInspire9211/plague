@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cq6m8or12s5e4" path="res://Assets/Entities/NPC/Peasant/sprite/MA1.png" id="7_4kef1"]
 [ext_resource type="Texture2D" uid="uid://cjphgbdxs4sdx" path="res://Assets/Entities/NPC/Bob/anims/sprite_0.png" id="8_ohuer"]
 [ext_resource type="Texture2D" uid="uid://c40phd0kg6fbf" path="res://Assets/Entities/NPC/Peasant/sprite/FE3.png" id="9_n3h7w"]
+[ext_resource type="Script" uid="uid://d02p4n56oxifp" path="res://Scripts/area_2d.gd" id="12_ohuer"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_www31"]
 texture = ExtResource("1_utchl")
@@ -961,6 +962,9 @@ tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_1uoo0")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4kef1"]
+size = Vector2(67, 7)
+
 [node name="Tavern" type="Node2D" unique_id=1406207778]
 script = ExtResource("1_4kef1")
 
@@ -1014,3 +1018,11 @@ position = Vector2(134, 236)
 [node name="pult" type="TileMapLayer" parent="." unique_id=2109267420]
 tile_map_data = PackedByteArray("AAAHAAMAAAAHAAQAAAAGAAMAAAAGAAQAAAAAAAIAAAAHAAQAAAD//wIAAAAGAAQAAAAKAAEAAAAHAAQAAAAJAAEAAAAGAAQAAAAAAAUAAAAGAAQAAAAKAAgAAAAHAAIAAAA=")
 tile_set = SubResource("TileSet_wwyh0")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1764844032]
+position = Vector2(117, 300)
+script = ExtResource("12_ohuer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=351227383]
+position = Vector2(17.5, 7.5)
+shape = SubResource("RectangleShape2D_4kef1")
