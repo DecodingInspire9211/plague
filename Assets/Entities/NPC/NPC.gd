@@ -17,7 +17,7 @@ var is_sick: bool = false
 var is_cured: bool = false
 
 
-func _on_ready() -> void:
+func _ready() -> void:
 	if sprite_node is AnimatedSprite2D:
 		play_animation(idle_animation)
 	
@@ -203,7 +203,7 @@ func _progress_disease(delta: float) -> void:
 
 
 func apply_medicine(medicine: Item) -> bool:
-	if not is_sick or not current_disease:
+	if not is_sick or current_disease == null:
 		print("%s is not sick" % display_name)
 		return false
 
@@ -211,8 +211,12 @@ func apply_medicine(medicine: Item) -> bool:
 		print("%s is not medicine" % medicine.item_name)
 		return false
 
+	# Cache disease info BEFORE anything can clear it
+	var disease_name := current_disease.disease_name
+	var disease_is_fatal := current_disease.is_fatal
+
 	# Check if medicine cures this disease
-	var can_cure = medicine.cures_diseases.has(current_disease.disease_name)
+	var can_cure := medicine.cures_diseases.has(disease_name)
 
 	if not can_cure:
 		# Medicine doesn't cure this disease, but it can still help (tending)
@@ -228,7 +232,7 @@ func apply_medicine(medicine: Item) -> bool:
 
 			return true
 		else:
-			print("%s doesn't cure %s" % [medicine.item_name, current_disease.disease_name])
+			print("%s doesn't cure %s" % [medicine.item_name, disease_name])
 			return false
 
 	# Success rate check
@@ -237,7 +241,6 @@ func apply_medicine(medicine: Item) -> bool:
 		if medicine.healing_amount > 0:
 			heal(medicine.healing_amount)
 
-		# Small reward for tending (treatment failed but tried)
 		var game_manager = get_node_or_null("/root/GameManager")
 		if game_manager and game_manager.has_method("add_gold"):
 			var tend_reward = 5
@@ -247,7 +250,7 @@ func apply_medicine(medicine: Item) -> bool:
 		print("Treatment failed!")
 		return true
 
-	# Cure the disease
+	# Cure the disease (this clears current_disease)
 	cure_disease()
 
 	# Apply healing
@@ -255,11 +258,11 @@ func apply_medicine(medicine: Item) -> bool:
 		heal(medicine.healing_amount)
 
 	# Larger reward for curing
-	var game_manager = get_node_or_null("/root/GameManager")
-	if game_manager and game_manager.has_method("add_gold"):
+	var game_manager2 = get_node_or_null("/root/GameManager")
+	if game_manager2 and game_manager2.has_method("add_gold"):
 		var cure_reward = 20
-		game_manager.add_gold(cure_reward)
-		print("%s cured %s with %s and received %d guilders!" % [display_name, current_disease.disease_name, medicine.item_name, cure_reward])
+		game_manager2.add_gold(cure_reward)
+		print("%s cured %s with %s and received %d guilders!" % [display_name, disease_name, medicine.item_name, cure_reward])
 
 	return true
 

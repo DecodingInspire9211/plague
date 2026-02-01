@@ -1,10 +1,11 @@
+# player.gd
 extends CharacterBody2D
 
 const WALK := 100.0
 const RUN := 200.0
 var SPEED := WALK
 
-@export var interaction_range := 25.0
+@export var interaction_range := 50.0
 
 @onready var interaction_raycast: RayCast2D = $InteractionRaycast
 @onready var inventory: Inventory = $Inventory
@@ -14,6 +15,7 @@ var SPEED := WALK
 
 var last_direction := Vector2.DOWN
 var current_interactable: Interactable = null
+
 
 func _ready():
 	SPEED = WALK
@@ -33,6 +35,7 @@ func _add_starting_items() -> void:
 	if plague_cure:
 		inventory.add_item(plague_cure, 3)
 		print("Added Plague Cure x3 to inventory")
+
 
 func _physics_process(_delta: float) -> void:
 	process_sprint()
@@ -54,7 +57,7 @@ func process_sprint() -> void:
 func process_input() -> void:
 	var input_direction := Input.get_vector("player_left", "player_right", "player_up", "player_down")
 	velocity = input_direction * SPEED
-	
+
 	if input_direction.length_squared() > 0:
 		last_direction = input_direction.normalized()
 
@@ -75,25 +78,25 @@ func update_raycast_direction() -> void:
 func check_for_interactable() -> void:
 	if not interaction_raycast:
 		return
-	
+
 	var new_interactable: Interactable = null
-	
+
 	if interaction_raycast.is_colliding():
 		var collider := interaction_raycast.get_collider()
-		
+
 		if collider is Interactable:
 			new_interactable = collider
 		elif collider.has_meta("interactable"):
 			new_interactable = collider.get_meta("interactable")
 		elif collider.get_parent() is Interactable:
 			new_interactable = collider.get_parent()
-	
+
 	# Update when facing different interactable
 	if new_interactable != current_interactable:
 		# Hide old prompt
 		if current_interactable:
 			current_interactable.interaction_unavailable.emit()
-		
+
 		# Show new prompt
 		current_interactable = new_interactable
 		if current_interactable:
@@ -102,4 +105,9 @@ func check_for_interactable() -> void:
 
 func attempt_interaction() -> void:
 	if current_interactable and current_interactable.is_interactable:
-		current_interactable.interact(self )
+		current_interactable.interact(self)
+
+
+# --- Added helper for NPCs to access the player inventory safely ---
+func get_inventory() -> Inventory:
+	return inventory

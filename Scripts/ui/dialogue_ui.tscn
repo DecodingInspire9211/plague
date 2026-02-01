@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dialogue_ui_scene"]
+[gd_scene format=3 uid="uid://c56vgn1b2dhv3"]
 
-[ext_resource type="Script" path="res://Scripts/ui/dialogue_ui.gd" id="1_dialogue"]
+[ext_resource type="Script" uid="uid://dgvw1vhkym2yn" path="res://Scripts/ui/dialogue_ui.gd" id="1_dialogue"]
 
-[node name="DialogueUI" type="Control"]
+[node name="DialogueUI" type="Control" unique_id=62887691]
 layout_mode = 3
 anchors_preset = 3
 anchor_left = 1.0
@@ -17,7 +17,7 @@ grow_horizontal = 0
 grow_vertical = 0
 script = ExtResource("1_dialogue")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=1689023049]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,7 +25,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=1063113368]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,17 +37,28 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=1276304393]
 layout_mode = 2
 
-[node name="NameLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="NameLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=1492820719]
 layout_mode = 2
-text = "NPC Name"
 theme_override_font_sizes/font_size = 10
+text = "NPC Name"
 
-[node name="DialogueLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="DialogueLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=117180081]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Dialogue text goes here..."
 theme_override_font_sizes/font_size = 9
+text = "Dialogue text goes here..."
 autowrap_mode = 3
+
+[node name="ChoicesBox" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=161246910]
+layout_mode = 2
+
+[node name="OptionA" type="Button" parent="Panel/MarginContainer/VBoxContainer/ChoicesBox" unique_id=128227196]
+layout_mode = 2
+text = "Yes"
+
+[node name="OptionB" type="Button" parent="Panel/MarginContainer/VBoxContainer/ChoicesBox" unique_id=1129682714]
+layout_mode = 2
+text = "No"
