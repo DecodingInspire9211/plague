@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://lhoafsuk42kh"]
+
+[ext_resource type="PackedScene" uid="uid://bb1k08dhupl44" path="res://Assets/Entities/NPC/NPC.tscn" id="1_ihy54"]
+[ext_resource type="Script" uid="uid://dgh2f60y68xft" path="res://Assets/Entities/NPC/Bartender(krisztofer)/bartender.gd" id="2_g4tnm"]
+[ext_resource type="Texture2D" uid="uid://conllpt2nv6wv" path="res://Assets/Entities/NPC/Bartender(krisztofer)/sprite/sprite_1.png" id="6_l4ymp"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mdr3g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_l4ymp")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}]
+
+[node name="Bob" unique_id=522452719 instance=ExtResource("1_ihy54")]
+script = ExtResource("2_g4tnm")
+wander_radius = 100.0
+wander_speed = 30.0
+display_name = "Bob the Ross"
+interaction_prompt = "Talk (E)"
+
+[node name="AnimatedSprite2D" parent="." index="0" unique_id=1421797300]
+sprite_frames = SubResource("SpriteFrames_mdr3g")
+animation = &"idle"
+
+[node name="Hitbox" parent="." index="1" unique_id=2070445247]
+scale = Vector2(0.75, 0.75)
+
+[node name="Label" parent="InteractionPrompt/PanelContainer" parent_id_path=PackedInt32Array(288041333) index="0" unique_id=29840377]
+label_settings = null
+horizontal_alignment = 1

@@ -1,7 +1,11 @@
-extends NPC  # Already set by Godot
+extends NPC
 
 @export var wander_radius: float = 100.0
 @export var wander_speed: float = 30.0
+@export var peasant_frames: SpriteFrames 
+@export var peasant_pngs: Array[Texture2D] = []
+@export var idle_fps: float = 4.0
+
 
 var home_position: Vector2
 var wander_target: Vector2
@@ -9,8 +13,22 @@ var is_wandering: bool = true
 
 
 func _ready() -> void:
-	super._ready()  # Calls NPC's _ready() which calls Interactable's _ready()
+	super._ready()
 	home_position = global_position
+
+	if peasant_pngs.size() > 0:
+		var frames := SpriteFrames.new()
+		frames.add_animation("idle")
+		frames.set_animation_speed("idle", idle_fps)
+
+		for png in peasant_pngs:
+			frames.add_frame("idle", png)
+
+		$AnimatedSprite2D.sprite_frames = frames
+		$AnimatedSprite2D.play("idle")
+
+
+
 	
 #	_pick_new_wander_target()
 
@@ -21,11 +39,15 @@ func _ready() -> void:
 
 
 func _process_wandering(delta: float) -> void:
-	var direction = (wander_target - global_position).normalized()
-	global_position += direction * wander_speed * delta
+	var to_target := wander_target - global_position
 	
-	if global_position.distance_to(wander_target) < 5:
+	# Use squared distance to avoid sqrt calculation
+	if to_target.length_squared() < 25: # 5 * 5
 		_pick_new_wander_target()
+		return
+	
+	var direction := to_target.normalized()
+	global_position += direction * wander_speed * delta
 	
 	if direction.x != 0:
 		flip_sprite_h(direction.x < 0)
@@ -41,7 +63,7 @@ func _pick_new_wander_target() -> void:
 
 func _on_interact(interactor: Node) -> void:
 	is_wandering = false
-	super._on_interact(interactor)  # Calls NPC's interaction (shows dialogue)
+	super._on_interact(interactor) # Calls NPC's interaction (shows dialogue)
 	
 	await get_tree().create_timer(3.0).timeout
 	is_wandering = true
